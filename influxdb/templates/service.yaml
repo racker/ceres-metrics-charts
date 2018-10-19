@@ -12,7 +12,7 @@ spec:
   ports:
   {{- if .Values.config.http.enabled }}
   - name: api
-    port: {{ .Values.config.http.bind_address }}
+    port: {{ .Values.config.http.port }}
     targetPort: {{ .Values.config.http.bind_address }}
   {{- end }}
   {{- if .Values.config.collectd.enabled }}

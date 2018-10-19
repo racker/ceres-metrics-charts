@@ -91,6 +91,7 @@ config:
   http:
     enabled: true
     bind_address: 8086
+    port: 8086
     auth_enabled: false
     log_enabled: true
     suppress_write_log: false
