@@ -1,11 +1,8 @@
-## Query service image from ECR
+## Ingestion service image from ECR
 image:
-  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/metrics-query-service"
+  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/metrics-ingestion-service"
   tag: "latest"
   pullPolicy: Always
-
-service:
-  type: LoadBalancer
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -17,12 +14,8 @@ resources:
     memory: 16Gi
     cpu: 8
 
-config:
-  target_port: 8080
-  port: 80
-
 containers:
-  replicas: 2
+  replicas: 1
   target_port: 8080
   liveness_probe:
       path: "/actuator/health"
@@ -37,3 +30,9 @@ containers:
 
   influxdb_url: "http://data-influxdb:8086"
   spring_profiles_active: production
+  secret_name: kafka-influxdb-java-secret
+  secret_mount_path: "/etc/kafka-keys"
+  kafka_servers: "kafka-b01.dev.monplat.rackspace.net:9092;kafka-b02.dev.monplat.rackspace.net:9092;kafka-b03.dev.monplat.rackspace.net:9092;kafka-b04.dev.monplat.rackspace.net:9092;kafka-b05.dev.monplat.rackspace.net:9092"
+  keystore_location: "/etc/kafka-keys/keystore-location"
+  truststore_location: "/etc/kafka-keys/truststore-location"
+  password_key: "store-password"
