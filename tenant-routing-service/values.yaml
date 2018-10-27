@@ -1,0 +1,40 @@
+## Query service image from ECR
+image:
+  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/tenant-routing-service"
+  tag: "latest"
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 0.1
+  limits:
+    memory: 16Gi
+    cpu: 8
+
+config:
+  target_port: 8080
+  port: 8080
+
+containers:
+  replicas: 1
+  target_port: 8080
+  liveness_probe:
+      path: "/actuator/health"
+      port: 8080
+      initial_delay_seconds: 30
+      timeout_seconds: 20
+  readiness_probe:
+      path: "/actuator/health"
+      port: 8080
+      initial_delay_seconds: 15
+      timeout_seconds: 20
+
+  redis_hostname: "redis-data"
+  redis_port: 6379
+  spring_profiles_active: production

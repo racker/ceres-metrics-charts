@@ -1,0 +1,21 @@
+{{- if .Values.persistence.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ template "redis.fullname" . }}
+  labels:
+    type: amazonEBS
+    dataVolume: {{ template "redis.fullname" . }}
+    app: {{ template "redis.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  capacity:
+    storage: {{ .Values.persistence.size | quote }}
+  accessModes:
+    - ReadWriteOnce
+  awsElasticBlockStore:
+    volumeID: {{ .Values.persistence.volumeID | quote }}
+    fsType: {{ .Values.persistence.fsType | quote }}
+{{- end }}
