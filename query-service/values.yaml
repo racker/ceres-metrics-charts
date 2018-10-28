@@ -37,7 +37,7 @@ containers:
 
   influxdb_urls: "http://data-influxdb:8086"
   spring_profiles_active: production
-  tenant_routing_service_url: "http://adacb8608d9ae11e8bf850abf9b20734-2011357652.us-east-1.elb.amazonaws.com:8080"
+  tenant_routing_service_url: "http://routing-tenant-routing-service:8080"
   rest_template_connection_request_timeout: 120000
   rest_template_connect_timeout: 120000
   rest_template_socket_timeout: 120000
