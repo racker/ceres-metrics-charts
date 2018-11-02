@@ -31,6 +31,10 @@ containers:
   influxdb_url: "http://data-influxdb:8086"
   spring_profiles_active: production
   tenant_routing_service_url: "http://routing-tenant-routing-service:8080"
+  rest_template_connection_request_timeout: 120000
+  rest_template_connect_timeout: 120000
+  rest_template_socket_timeout: 120000
+  rest_template_connection_pooling_max: 20
   secret_name: kafka-influxdb-java-secret
   secret_mount_path: "/etc/kafka-keys"
   kafka_servers: "kafka-b01.dev.monplat.rackspace.net:9092;kafka-b02.dev.monplat.rackspace.net:9092;kafka-b03.dev.monplat.rackspace.net:9092;kafka-b04.dev.monplat.rackspace.net:9092;kafka-b05.dev.monplat.rackspace.net:9092"
