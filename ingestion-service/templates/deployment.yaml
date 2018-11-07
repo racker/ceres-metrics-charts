@@ -57,6 +57,10 @@ spec:
           value: "{{ .Values.containers.rest_template_connect_timeout }}"
         - name: REST_TEMPLATE_SOCKET_TIMEOUT
           value: "{{ .Values.containers.rest_template_socket_timeout }}"
+        - name: LISTENER_CONTAINER_IDLE_INTERVAL
+          value: "{{ .Values.containers.listener_container_idle_interval }}"
+        - name: SESSION_TIMEOUT_MS_CONFIG
+          value: "{{ .Values.containers.session_timeout_ms_config }}"
         - name: REST_TEMPLATE_CONNECTION_POOLING_MAX
           value: "{{ .Values.containers.rest_template_connection_pooling_max }}"
         - name: KAFKA_SERVERS
