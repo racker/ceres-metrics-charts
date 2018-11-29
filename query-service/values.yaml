@@ -1,6 +1,6 @@
 ## Query service image from ECR
 image:
-  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/metrics-query-service"
+  repo: "gcr.io/ceres-dev-222017/metrics-query-service"
   tag: "latest"
   pullPolicy: Always
 

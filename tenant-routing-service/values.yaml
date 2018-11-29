@@ -1,6 +1,6 @@
 ## Query service image from ECR
 image:
-  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/tenant-routing-service"
+  repo: "gcr.io/ceres-dev-222017/tenant-routing-service"
   tag: "latest"
   pullPolicy: Always
 
@@ -35,6 +35,6 @@ containers:
       initial_delay_seconds: 15
       timeout_seconds: 20
 
-  redis_hostname: "redis-data"
+  redis_hostname: "lookup-redis"
   redis_port: 6379
   spring_profiles_active: production

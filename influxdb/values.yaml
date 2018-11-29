@@ -21,18 +21,18 @@ persistence:
   ##
   # storageClass:
   accessMode: ReadWriteOnce
-  size: 8Gi
-  volumeID: vol-0173d18d1a7c5579d
+  size: 250Gi
+  pdName: influxdb-disk
   fsType: ext4
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
   requests:
-    memory: 256Mi
-    cpu: 0.1
-  limits:
     memory: 16Gi
+    cpu: 4
+  limits:
+    memory: 32Gi
     cpu: 8
 
 ## Change InfluxDB configuration paramaters below:

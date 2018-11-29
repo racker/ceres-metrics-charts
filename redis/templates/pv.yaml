@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: {{ template "redis.fullname" . }}
   labels:
-    type: amazonEBS
+    type: gcePersistentDisk
     dataVolume: {{ template "redis.fullname" . }}
     app: {{ template "redis.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -15,7 +15,7 @@ spec:
     storage: {{ .Values.persistence.size | quote }}
   accessModes:
     - ReadWriteOnce
-  awsElasticBlockStore:
-    volumeID: {{ .Values.persistence.volumeID | quote }}
+  gcePersistentDisk:
+    pdName: {{ .Values.persistence.pdName | quote }}
     fsType: {{ .Values.persistence.fsType | quote }}
 {{- end }}

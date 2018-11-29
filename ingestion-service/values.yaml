@@ -1,6 +1,6 @@
 ## Ingestion service image from ECR
 image:
-  repo: "749833639264.dkr.ecr.us-east-1.amazonaws.com/metrics-ingestion-service"
+  repo: "gcr.io/ceres-dev-222017/metrics-ingestion-service"
   tag: "latest"
   pullPolicy: Always
 
