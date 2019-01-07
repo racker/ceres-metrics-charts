@@ -1,0 +1,8 @@
+apiVersion: v1
+name: rollup-service
+version: 0.2.1
+description: Rollup service
+keywords:
+- influxdb
+- ingest
+- timeseries
