@@ -7,4 +7,4 @@ helm install --name lookup --namespace metrics ./redis/
 helm install --name routing --namespace metrics ./tenant-routing-service/
 helm install --name ingestion --namespace metrics ./ingestion-service/
 helm install --name query --namespace metrics ./query-service/
-helm install --name rollup --namespace metrics ./kapacitor/
+helm install --name rollup --namespace metrics ./rollup-service/
