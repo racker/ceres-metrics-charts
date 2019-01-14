@@ -1,0 +1,2 @@
+containers:
+  spring_profiles_active: rollup-data-consumer,production
