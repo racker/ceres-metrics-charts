@@ -1,0 +1,2 @@
+containers:
+  spring_profiles_active: raw-data-consumer,production

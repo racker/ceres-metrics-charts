@@ -11,10 +11,21 @@ spec:
       labels:
         app: {{ template "fullname" . }}
     spec:
+      volumes:
+      - name: rollup-secret
+        secret:
+          secretName: "{{ .Values.containers.secret_name }}"
+
       containers:
       - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
+        volumeMounts:
+        - name: rollup-secret
+          mountPath: "{{ .Values.containers.secret_mount_path }}"
+          readOnly: true
+
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         ports:
@@ -34,21 +45,32 @@ spec:
           timeoutSeconds: {{ .Values.containers.readiness_probe.timeout_seconds }}
 
         env:
-        - name: INFLUXDB_URL
-          value: "{{ .Values.containers.influxdb_url }}"
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.containers.spring_profiles_active }}"
-        - name: TENANT_ROUTING_SERVICE_URL
-          value: "{{ .Values.containers.tenant_routing_service_url }}"
-        - name: REST_TEMPLATE_CONNECTION_REQUEST_TIMEOUT
-          value: "{{ .Values.containers.rest_template_connection_request_timeout }}"
-        - name: REST_TEMPLATE_CONNECT_TIMEOUT
-          value: "{{ .Values.containers.rest_template_connect_timeout }}"
-        - name: REST_TEMPLATE_SOCKET_TIMEOUT
-          value: "{{ .Values.containers.rest_template_socket_timeout }}"
-        - name: LISTENER_CONTAINER_IDLE_INTERVAL
-          value: "{{ .Values.containers.listener_container_idle_interval }}"
-        - name: SESSION_TIMEOUT_MS_CONFIG
-          value: "{{ .Values.containers.session_timeout_ms_config }}"
-        - name: REST_TEMPLATE_CONNECTION_POOLING_MAX
-          value: "{{ .Values.containers.rest_template_connection_pooling_max }}"
+
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "{{ .Values.containers.kafka_bootstrap_servers }}"
+        - name: KEYSTORE_LOCATION
+          value: "{{ .Values.containers.keystore_location }}"
+        - name: TRUSTSTORE_LOCATION
+          value: "{{ .Values.containers.truststore_location }}"
+        - name: ENDPOINT_IDENTIFICATION_ALGORITHM
+          value: "{{ .Values.containers.endpoint_identification_algorithm }}"
+
+        - name: TRUSTSTORE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Values.containers.secret_name }}"
+              key: "{{ .Values.containers.password_key }}"
+
+        - name: KEY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Values.containers.secret_name }}"
+              key: "{{ .Values.containers.password_key }}"
+
+        - name: KEYSTORE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Values.containers.secret_name }}"
+              key: "{{ .Values.containers.password_key }}"
