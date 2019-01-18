@@ -29,7 +29,7 @@ containers:
       timeout_seconds: 20
 
   spring_profiles_active: production
-  kafka_bootstrap_servers: "kafka-b01.dev.monplat.rackspace.net:9092;kafka-b02.dev.monplat.rackspace.net:9092;kafka-b03.dev.monplat.rackspace.net:9092;kafka-b04.dev.monplat.rackspace.net:9092;kafka-b05.dev.monplat.rackspace.net:9092"
+  kafka_bootstrap_servers: "kafka-01.dev.monplat.rackspace.net:9092;kafka-02.dev.monplat.rackspace.net:9092;kafka-03.dev.monplat.rackspace.net:9092;kafka-04.dev.monplat.rackspace.net:9092;kafka-05.dev.monplat.rackspace.net:9092"
   secret_name: kafka-influxdb-java-secret
   secret_mount_path: "/etc/kafka-keys"
   keystore_location: "/etc/kafka-keys/keystore-location"
