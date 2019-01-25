@@ -24,12 +24,22 @@ spec:
           httpGet:
             path: {{ .Values.containers.liveness_probe.path }}
             port: {{ .Values.containers.liveness_probe.port }}
+            httpHeaders:
+            - name: X-Roles
+              value: foo
+            - name: X-Tenant-Id
+              value: todo
           initialDelaySeconds: {{ .Values.containers.liveness_probe.initial_delay_seconds }}
           timeoutSeconds: {{ .Values.containers.liveness_probe.timeout_seconds }}
         readinessProbe:
           httpGet:
             path: {{ .Values.containers.readiness_probe.path }}
             port: {{ .Values.containers.readiness_probe.port }}
+            httpHeaders:
+            - name: X-Roles
+              value: foo
+            - name: X-Tenant-Id
+              value: todo
           initialDelaySeconds: {{ .Values.containers.readiness_probe.initial_delay_seconds }}
           timeoutSeconds: {{ .Values.containers.readiness_probe.timeout_seconds }}
 

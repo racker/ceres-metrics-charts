@@ -39,7 +39,7 @@ containers:
   rest_template_connection_pooling_max: 20
   secret_name: kafka-influxdb-java-secret
   secret_mount_path: "/etc/kafka-keys"
-  kafka_servers: "kafka-b01.dev.monplat.rackspace.net:9092;kafka-b02.dev.monplat.rackspace.net:9092;kafka-b03.dev.monplat.rackspace.net:9092;kafka-b04.dev.monplat.rackspace.net:9092;kafka-b05.dev.monplat.rackspace.net:9092"
+  kafka_servers: "kafka-01.dev.monplat.rackspace.net:9092;kafka-02.dev.monplat.rackspace.net:9092;kafka-03.dev.monplat.rackspace.net:9092;kafka-04.dev.monplat.rackspace.net:9092;kafka-05.dev.monplat.rackspace.net:9092"
   keystore_location: "/etc/kafka-keys/keystore-location"
   truststore_location: "/etc/kafka-keys/truststore-location"
   password_key: "store-password"
