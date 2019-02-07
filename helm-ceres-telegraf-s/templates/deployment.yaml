@@ -3,10 +3,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
+  annotations:
+        checksum/config-map: {{ include (print $.Chart.Name "/templates/configmap.yaml") . | sha256sum }}
 spec:
   replicas: 1
   template:
