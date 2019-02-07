@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: {{ template "fullname" . }}
   namespace: {{ .Release.Namespace }}
@@ -8,11 +8,14 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    part-of: ceres
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
   replicas: 1
   template:
     metadata:
-      namespace: {{ .Release.Namespace }}
       labels:
         app: {{ template "fullname" . }}
       annotations:
@@ -20,7 +23,7 @@ spec:
     spec:
       containers:
       - name: {{ template "fullname" . }}
-        image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
@@ -61,13 +64,16 @@ spec:
         - name: config
           mountPath: /etc/influxdb
       volumes:
-      - name: data
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ template "fullname" . }}
-      {{- else }}
-        emptyDir: {}
-      {{- end }}
       - name: config
         configMap:
           name: {{ template "fullname" . }}
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      accessModes: [ {{ .Values.storage.accessMode | quote }}]
+      resources:
+        requests:
+          storage: {{ .Values.storage.size }}
