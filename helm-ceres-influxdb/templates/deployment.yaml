@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -11,8 +12,11 @@ spec:
   replicas: 1
   template:
     metadata:
+      namespace: {{ .Release.Namespace }}
       labels:
         app: {{ template "fullname" . }}
+      annotations:
+        checksum/config-map: {{ include (print $.Chart.Name "/templates/config.yaml") . | sha256sum }}
     spec:
       containers:
       - name: {{ template "fullname" . }}
