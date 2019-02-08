@@ -1,11 +1,42 @@
 #!/bin/bash
+set -e
 
-helm install --name data --namespace metrics ./influxdb/
-helm install --name polling --namespace metrics ./telegraf-s/
-helm install --name hosts --namespace metrics ./telegraf-ds/
-helm install --name lookup --namespace metrics ./redis/
-helm install --name routing --namespace metrics ./tenant-routing-service/
-helm install --name raw-ingestion --namespace metrics -f ./ingestion-service/override-raw.yaml  ./ingestion-service/
-helm install --name rollup-ingestion --namespace metrics -f ./ingestion-service/override-rollup.yaml  ./ingestion-service/
-helm install --name query --namespace metrics ./query-service/
-helm install --name rollup --namespace metrics ./rollup-service/
+WHERE_HELM=$(which -a helm | head -1)
+if [[ -z $WHERE_HELM ]] ; then
+    echo "Please install helm to run this script"
+    echo "Linux with snap:"
+    echo "  $ sudo snap install helm --classic"
+    echo "MacOS with Homebrew"
+    echo " brew install kubernetes-helm"
+    echo "Other *nix"
+    echo " $ wget https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz && \ "
+    echo "    tar -zxvf helm-v2.12.3-linux-amd64.tar.gz && \ "
+    echo "    find -executable -type f -name helm -exec sudo cp -v {} /usr/local/bin/ "
+    exit 1
+fi
+
+# Set namespace to testing by default
+if [[ -z "$1" ]] ; then
+    NAMESPACE="testing"
+else
+    # Does given namespace exist
+    NS_COUNT=$($(which kubectl) get namespace | grep "^${1} " | wc -l)
+    if [[ "$NS_COUNT" == '0' ]] ; then
+        echo "It appears that the namespace $1 does not exist"
+        $(which kubectl) get namespace
+    else
+        NAMESPACE=$1
+    fi
+fi
+
+$WHERE_HELM install --name data --namespace $NAMESPACE ./helm-ceres-influxdb/
+# $WHERE_HELM install --name polling --namespace $NAMESPACE ./telegraf-s/
+# $WHERE_HELM install --name hosts --namespace $NAMESPACE ./telegraf-ds/
+# $WHERE_HELM install --name lookup --namespace $NAMESPACE ./redis/
+# $WHERE_HELM install --name routing --namespace $NAMESPACE ./tenant-routing-service/
+# $WHERE_HELM install --name raw-ingestion --namespace $NAMESPACE -f ./ingestion-service/override-raw.yaml  ./ingestion-service/
+# $WHERE_HELM install --name rollup-ingestion --namespace $NAMESPACE -f ./ingestion-service/override-rollup.yaml  ./ingestion-service/
+# $WHERE_HELM install --name query --namespace $NAMESPACE ./query-service/
+# $WHERE_HELM install --name rollup --namespace $NAMESPACE ./rollup-service/
+
+echo "Good Luck and may the force be with you!!!"
