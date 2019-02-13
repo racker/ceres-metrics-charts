@@ -6,6 +6,9 @@ image:
   tag: "1.8.1-alpine"
   pullPolicy: IfNotPresent
 
+nameOverride: ""
+fullnameOverride: ""
+
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
@@ -19,7 +22,8 @@ resources:
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.1/administration/configuration/
 config:
-  # global_tags:
+  global_tags:
+    dc: "us-east-1"
   #   cluster: "mycluster"
   agent:
     interval: "10s"

@@ -1,0 +1,15 @@
+[submodule "helm-ceres-influxdb"]
+	path = helm-ceres-influxdb
+	url = git@github.com:Rackspace-Segment-Support/helm-ceres-influxdb.git
+[submodule "helm-ceres-ingestion-service"]
+	path = helm-ceres-ingestion-service
+	url = git@github.com:Rackspace-Segment-Support/helm-ceres-ingestion-service.git
+[submodule "helm-ceres-query-service"]
+	path = helm-ceres-query-service
+	url = git@github.com:Rackspace-Segment-Support/helm-ceres-query-service.git
+[submodule "helm-ceres-rollup-service"]
+	path = helm-ceres-rollup-service
+	url = git@github.com:Rackspace-Segment-Support/helm-ceres-rollup-service.git
+[submodule "helm-ceres-tenant-routing-service"]
+	path = helm-ceres-tenant-routing-service
+	url = git@github.com:Rackspace-Segment-Support/helm-ceres-tenant-routing-service.git

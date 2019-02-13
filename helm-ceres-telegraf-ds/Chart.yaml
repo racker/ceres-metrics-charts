@@ -1,4 +1,4 @@
-name: telegraf-ds
+name: helm-ceres-telegraf-ds
 version: 0.1.0
 description: Telegraf is an agent written in Go for collecting, processing, aggregating, and writing metrics.
 keywords:
@@ -6,3 +6,4 @@ keywords:
 - collector
 - timeseries
 - influxdata
+icon: https://752f77aa107738c25d93-f083e9a6295a3f0714fa019ffdca65c3.ssl.cf1.rackcdn.com/icons/og-image.png

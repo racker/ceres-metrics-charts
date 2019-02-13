@@ -1,2 +1,9 @@
 .idea
-helm-ceres-*.tgz
+helm-*.tgz
+ingestion-service-*.tgz
+kapacitor-*.tgz
+query-service-*.tgz
+redis-*tgz
+rollup-service-*.tgz
+telegraf-ds-*.tgz
+tenant-routing-service-*.tgz
