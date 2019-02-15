@@ -17,7 +17,7 @@ fi
 
 # Set namespace to testing by default
 if [[ -z "$1" ]] ; then
-    NAMESPACE="testing"
+    NAMESPACE="default"
 else
     # Does given namespace exist
     NS_COUNT=$($(which kubectl) get namespace | grep "^${1} " | wc -l)
@@ -30,13 +30,13 @@ else
 fi
 
 $WHERE_HELM install --name data --namespace $NAMESPACE ./helm-ceres-influxdb/
-# $WHERE_HELM install --name polling --namespace $NAMESPACE ./telegraf-s/
-# $WHERE_HELM install --name hosts --namespace $NAMESPACE ./telegraf-ds/
-# $WHERE_HELM install --name lookup --namespace $NAMESPACE ./redis/
-# $WHERE_HELM install --name routing --namespace $NAMESPACE ./tenant-routing-service/
-# $WHERE_HELM install --name raw-ingestion --namespace $NAMESPACE -f ./ingestion-service/override-raw.yaml  ./ingestion-service/
-# $WHERE_HELM install --name rollup-ingestion --namespace $NAMESPACE -f ./ingestion-service/override-rollup.yaml  ./ingestion-service/
-# $WHERE_HELM install --name query --namespace $NAMESPACE ./query-service/
-# $WHERE_HELM install --name rollup --namespace $NAMESPACE ./rollup-service/
+$WHERE_HELM install --name polling --namespace $NAMESPACE ./helm-ceres-telegraf-s/
+$WHERE_HELM install --name hosts --namespace $NAMESPACE ./helm-ceres-telegraf-ds/
+$WHERE_HELM install --name lookup --namespace $NAMESPACE ./redis/
+$WHERE_HELM install --name routing --namespace $NAMESPACE ./helm-ceres-tenant-routing-service/
+$WHERE_HELM install --name raw-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-raw.yaml  ./helm-ceres-ingestion-service/
+$WHERE_HELM install --name rollup-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-rollup.yaml  ./helm-ceres-ingestion-service/
+$WHERE_HELM install --name query --namespace $NAMESPACE ./helm-ceres-query-service/
+$WHERE_HELM install --name rollup --namespace $NAMESPACE ./helm-ceres-rollup-service/
 
 echo "Good Luck and may the force be with you!!!"

@@ -1,5 +1,5 @@
 name: helm-ceres-telegraf-s
-version: 0.2.0
+version: 0.2.2
 description: Telegraf is an agent written in Go for collecting, processing, aggregating, and writing metrics.
 keywords:
 - telegraf
@@ -11,3 +11,4 @@ maintainers:
 - name: Jack Zampolin
   email: jack@influxdb.com
 engine: gotpl
+icon: https://752f77aa107738c25d93-f083e9a6295a3f0714fa019ffdca65c3.ssl.cf1.rackcdn.com/icons/og-image.png
