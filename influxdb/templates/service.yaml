@@ -1,34 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "fullname" . }}
+  name: influxdbsvc
   labels:
-    app: {{ template "fullname" . }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    release: "{{ .Release.Name }}"
-    heritage: "{{ .Release.Service }}"
+    app: influxdbsvc
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-  {{- if .Values.config.http.enabled }}
-  - name: api
-    port: {{ .Values.config.http.port }}
-    targetPort: {{ .Values.config.http.bind_address }}
-  {{- end }}
-  {{- if .Values.config.collectd.enabled }}
-  - name: collectd
-    port: {{ .Values.config.collectd.bind_address }}
-    targetPort: {{ .Values.config.collectd.bind_address }}
-  {{- end }}
-  {{- if .Values.config.udp.enabled }}
-  - name: udp
-    port: {{ .Values.config.udp.bind_address }}
-    targetPort: {{ .Values.config.udp.bind_address }}
-  {{- end }}
-  {{- if .Values.config.opentsdb.enabled }}
-  - name: opentsdb
-    port: {{ .Values.config.opentsdb.bind_address }}
-    targetPort: {{ .Values.config.opentsdb.bind_address }}
-  {{- end }}
+  clusterIP: None
   selector:
     app: {{ template "fullname" . }}
+  ports:
+  - name: api
+    port: 8086
+    targetPort: 8086

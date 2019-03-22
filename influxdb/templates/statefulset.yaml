@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+spec:
+  serviceName: "influxdbsvc"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }} # has to match .spec.template.metadata.labels
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 50Gi
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }} # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: {{ template "fullname" . }}
+        image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
+        ports:
+        - name: api
+          containerPort: 8086
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: api
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: api
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: data
+          mountPath: {{ .Values.config.storage_directory }}
+        - name: config
+          mountPath: /etc/influxdb
+
+
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "fullname" . }}

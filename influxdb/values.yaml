@@ -9,8 +9,8 @@ image:
 ## NodePort is default
 ## ref: http://kubernetes.io/docs/user-guide/services/
 ##
-service:
-  type: ClusterIP
+#service:
+#  type: ClusterIP
 
 ## Persist data to a persitent volume
 ##
@@ -21,7 +21,7 @@ persistence:
   ##
   # storageClass:
   accessMode: ReadWriteOnce
-  size: 250Gi
+  size: 50Gi
   pdName: influxdb-disk
   fsType: ext4
 
@@ -44,12 +44,12 @@ config:
   storage_directory: /var/lib/influxdb
   meta:
     retention_autocreate: true
-    logging_enabled: true
+    logging_enabled: false
   data:
     wal_fsync_delay: 0s
     index_version: inmem
     validate_keys: false
-    query_log_enabled: true
+    query_log_enabled: false
     cache_max_memory_size: 1073741824
     cache_snapshot_memory_size: 26214400
     cache_snapshot_write_cold_duration: 10m0s
@@ -93,9 +93,10 @@ config:
     bind_address: 8086
     port: 8086
     auth_enabled: false
-    log_enabled: true
-    suppress_write_log: false
+    log_enabled: false
+    suppress_write_log: true
     access_log_path: ""
+    access_log_status_filter: ["4xx", "5xx"]
     write_tracing: false
     pprof_enabled: true
     debug_pprof_enabled: false
@@ -116,7 +117,7 @@ config:
   logging:
     format: auto
     level: info
-    suppress_logo: false
+    suppress_logo: true
 
   graphite:
     enabled: false

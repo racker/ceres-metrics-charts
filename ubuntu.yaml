@@ -4,7 +4,7 @@ metadata:
   name: curl-pod
 spec:
   containers:
-    - name: mrit-dummy-pod
+    - name: curl-pod
       image: ubuntu
       command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
   restartPolicy: Never

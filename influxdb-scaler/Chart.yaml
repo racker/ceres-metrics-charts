@@ -1,0 +1,7 @@
+apiVersion: v1
+name: influxdb-scaler
+version: 0.2.1
+description: This service autoscale InfluxDB Statefuleset and load-balance the instances.
+keywords:
+- redis
+- kubernetes api

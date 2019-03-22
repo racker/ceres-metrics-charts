@@ -28,7 +28,9 @@ containers:
       initial_delay_seconds: 15
       timeout_seconds: 20
 
-  influxdb_url: "http://data-influxdb:8086"
+#  influxdb_url: "http://data-influxdb:8086"
+
+  influxdb_metrics_url: "http://data-influxdb-0.influxdbsvc:8086"
   spring_profiles_active: production
   tenant_routing_service_url: "http://routing-tenant-routing-service:8080"
   rest_template_connection_request_timeout: 120000

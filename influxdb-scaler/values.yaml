@@ -1,6 +1,6 @@
 ## Query service image from ECR
 image:
-  repo: "gcr.io/ceres-dev-222017/tenant-routing-service"
+  repo: "gcr.io/ceres-dev-222017/influxdb-scaler"
   tag: "latest"
   pullPolicy: Always
 
@@ -37,6 +37,8 @@ containers:
 
   redis_hostname: "lookup-redis"
   redis_port: 6379
+  kubernetes_namespace: metrics
+  kubernetes_statefulset_name: data-influxdb
+  kubernetes_headless_service_name: influxdbsvc
   spring_profiles_active: production
-  influxdb_metrics_url: "http://data-influxdb-0.influxdbsvc:8086"
-  influxdb_scaler_url: http://influxdbscaler-influxdb-scaler:8080
+  influxdb_metrics_url: http://data-influxdb-0:8086

@@ -76,6 +76,7 @@ data:
       log-enabled = {{ .Values.config.http.log_enabled }}
       suppress-write-log = {{ .Values.config.http.suppress_write_log }}
       access-log-path = "{{ .Values.config.http.access_log_path }}"
+      access-log-status-filters = ["2xx", "4xx", "5xx"]
       write-tracing = {{ .Values.config.http.write_tracing }}
       pprof-enabled = {{ .Values.config.http.pprof_enabled }}
       debug-pprof-enabled = {{ .Values.config.http.debug_pprof_enabled }}

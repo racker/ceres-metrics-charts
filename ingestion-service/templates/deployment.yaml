@@ -45,8 +45,12 @@ spec:
           timeoutSeconds: {{ .Values.containers.readiness_probe.timeout_seconds }}
 
         env:
-        - name: INFLUXDB_URL
-          value: "{{ .Values.containers.influxdb_url }}"
+#        - name: INFLUXDB_URL
+#          value: "{{ .Values.containers.influxdb_url }}"
+
+        - name: INFLUXDB_METRICS_URL
+          value: "{{ .Values.containers.influxdb_metrics_url }}"
+
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.containers.spring_profiles_active }}"
         - name: TENANT_ROUTING_SERVICE_URL

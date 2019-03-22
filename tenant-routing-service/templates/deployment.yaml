@@ -40,3 +40,8 @@ spec:
           value: "{{ .Values.containers.redis_port }}"
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.containers.spring_profiles_active }}"
+        - name: INFLUXDB_METRICS_URL
+          value: "{{ .Values.containers.influxdb_metrics_url }}"
+
+        - name: INFLUXDB_SCALER_URL
+          value: "{{ .Values.containers.influxdb_scaler_url }}"

@@ -15,7 +15,7 @@ resources:
     cpu: 8
 
 containers:
-  replicas: 1
+  replicas: 5
   target_port: 8080
   liveness_probe:
       path: "/actuator/health"
