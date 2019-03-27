@@ -6,7 +6,7 @@ metadata:
     app: {{ template "fullname" . }}
 spec:
   serviceName: "influxdbsvc"
-  replicas: 2
+  replicas: 6
   selector:
     matchLabels:
       app: {{ template "fullname" . }} # has to match .spec.template.metadata.labels

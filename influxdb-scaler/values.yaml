@@ -41,4 +41,4 @@ containers:
   kubernetes_statefulset_name: data-influxdb
   kubernetes_headless_service_name: influxdbsvc
   spring_profiles_active: production
-  influxdb_metrics_url: http://data-influxdb-0:8086
+  influxdb_metrics_url: http://data-influxdb-0.influxdbsvc:8086
