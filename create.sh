@@ -29,14 +29,29 @@ else
     fi
 fi
 
-$WHERE_HELM install --name data --namespace $NAMESPACE ./helm-ceres-influxdb/
-$WHERE_HELM install --name polling --namespace $NAMESPACE ./helm-ceres-telegraf-s/
-$WHERE_HELM install --name hosts --namespace $NAMESPACE ./helm-ceres-telegraf-ds/
-$WHERE_HELM install --name lookup --namespace $NAMESPACE ./redis/
-$WHERE_HELM install --name routing --namespace $NAMESPACE ./helm-ceres-tenant-routing-service/
-$WHERE_HELM install --name raw-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-raw.yaml  ./helm-ceres-ingestion-service/
-$WHERE_HELM install --name rollup-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-rollup.yaml  ./helm-ceres-ingestion-service/
-$WHERE_HELM install --name query --namespace $NAMESPACE ./helm-ceres-query-service/
-$WHERE_HELM install --name rollup --namespace $NAMESPACE ./helm-ceres-rollup-service/
 
-echo "Good Luck and may the force be with you!!!"
+$WHERE_HELM install --name data --namespace $NAMESPACE ./helm-ceres-influxdb/
+
+$WHERE_HELM install --name lookup --namespace $NAMESPACE ./redis/
+
+$WHERE_HELM install --name influxdbscaler --namespace $NAMESPACE ./helm-ceres-influxdb-scaler/
+
+$WHERE_HELM install --name routing --namespace $NAMESPACE ./helm-ceres-tenant-routing-service/
+
+## Upgrade command for routing
+# $WHERE_HELM upgrade routing --namespace $NAMESPACE ./tenant-routing-service/
+
+$WHERE_HELM install --name raw-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-raw.yaml  ./helm-ceres-ingestion-service/
+
+## Upgrade command for raw-ingestion
+# $WHERE_HELM upgrade raw-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-raw.yaml  ./helm-ceres-ingestion-service/
+
+$WHERE_HELM install --name rollup-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-rollup.yaml  ./helm-ceres-ingestion-service/
+## Upgrade command for rollup-ingestion
+# $WHERE_HELM upgrade rollup-ingestion --namespace $NAMESPACE -f ./helm-ceres-ingestion-service/override-rollup.yaml  ./helm-ceres-ingestion-service/
+
+$WHERE_HELM install --name query --namespace $NAMESPACE ./helm-ceres-query-service/
+
+$WHERE_HELM install --name rollup --namespace $NAMESPACE ./helm-ceres-rollup-service/
+## Upgrade command for rollup
+# $WHERE_HELM upgrade rollup --namespace $NAMESPACE ./helm-ceres-rollup-service/
