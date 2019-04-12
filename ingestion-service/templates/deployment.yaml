@@ -50,7 +50,10 @@ spec:
 
         - name: INFLUXDB_METRICS_URL
           value: "{{ .Values.containers.influxdb_metrics_url }}"
-
+        - name: NUMBER_OF_POINTS_IN_A_WRITE_BATCH
+          value: "{{ .Values.containers.number_of_points_in_a_write_batch }}"
+        - name: WRITE_FLUSH_DURATION_MS_LIMIT
+          value: "{{ .Values.containers.write_flush_duration_ms_limit }}"
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.containers.spring_profiles_active }}"
         - name: TENANT_ROUTING_SERVICE_URL
@@ -65,6 +68,14 @@ spec:
           value: "{{ .Values.containers.listener_container_idle_interval }}"
         - name: SESSION_TIMEOUT_MS_CONFIG
           value: "{{ .Values.containers.session_timeout_ms_config }}"
+        - name: MAX_POLL_RECORDS_CONFIG
+          value: "{{ .Values.containers.max_poll_records_config }}"
+        - name: FETCH_MIN_BYTES_CONFIG
+          value: "{{ .Values.containers.fetch_min_bytes_config }}"
+        - name: FETCH_MAX_WAIT_MS_CONFIG
+          value: "{{ .Values.containers.fetch_max_wait_ms_config }}"
+        - name: MAX_PARTITION_FETCH_BYTES_CONFIG
+          value: "{{ .Values.containers.max_partition_fetch_bytes_config }}"
         - name: REST_TEMPLATE_CONNECTION_POOLING_MAX
           value: "{{ .Values.containers.rest_template_connection_pooling_max }}"
         - name: KAFKA_SERVERS

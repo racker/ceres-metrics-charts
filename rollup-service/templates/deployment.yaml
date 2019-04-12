@@ -47,6 +47,8 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.containers.spring_profiles_active }}"
+        - name: INFLUXDB_METRICS_URL
+          value: "{{ .Values.containers.influxdb_metrics_url }}"
 
         - name: KAFKA_BOOTSTRAP_SERVERS
           value: "{{ .Values.containers.kafka_bootstrap_servers }}"

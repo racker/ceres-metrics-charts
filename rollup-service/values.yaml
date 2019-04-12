@@ -8,14 +8,14 @@ image:
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
   requests:
-    memory: 256Mi
-    cpu: 0.1
+    memory: 3Gi
+    cpu: 1000m
   limits:
     memory: 16Gi
-    cpu: 8
+    cpu: 8000m
 
 containers:
-  replicas: 5
+  replicas: 15
   target_port: 8080
   liveness_probe:
       path: "/actuator/health"
@@ -29,6 +29,7 @@ containers:
       timeout_seconds: 20
 
   spring_profiles_active: production
+  influxdb_metrics_url: "http://data-influxdb-0.influxdbsvc:8086"
   kafka_bootstrap_servers: "kafka-01.dev.monplat.rackspace.net:9092;kafka-02.dev.monplat.rackspace.net:9092;kafka-03.dev.monplat.rackspace.net:9092;kafka-04.dev.monplat.rackspace.net:9092;kafka-05.dev.monplat.rackspace.net:9092"
   secret_name: kafka-influxdb-java-secret
   secret_mount_path: "/etc/kafka-keys"

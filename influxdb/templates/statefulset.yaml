@@ -27,6 +27,13 @@ spec:
       - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        resources:
+          requests:
+            cpu: "2000m"
+            memory: "8Gi"
+          limits:
+            cpu: "8000m"
+            memory: "32Gi"
 
         ports:
         - name: api
