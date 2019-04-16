@@ -45,8 +45,10 @@ spec:
           timeoutSeconds: {{ .Values.containers.readiness_probe.timeout_seconds }}
 
         env:
-#        - name: INFLUXDB_URL
-#          value: "{{ .Values.containers.influxdb_url }}"
+        - name: STACKDRIVER_ENABLED
+          value: "{{ .Values.containers.stackdriver_enabled }}"
+        - name: STACKDRIVER_BATCH_SIZE
+          value: "{{ .Values.containers.stackdriver_batch_size }}"
 
         - name: INFLUXDB_METRICS_URL
           value: "{{ .Values.containers.influxdb_metrics_url }}"
